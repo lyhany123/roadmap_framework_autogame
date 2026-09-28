@@ -1,0 +1,33 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build output
+Debug/
+Release/
+x64/
+x86/
+
+# C/C++ build files
+*.obj
+*.pch
+*.pdb
+*.ilk
+*.idb
+*.ipch
+*.tlog
+
+# Visual Studio generated files
+*.VC.db
+*.VC.VC.opendb
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+install_manifest.txt
+
+# Build directories
+build/
+out/
