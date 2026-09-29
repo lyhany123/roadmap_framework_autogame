@@ -22,6 +22,13 @@ public:
 
 
 // Implementation
+
+private:
+	CListCtrl m_listWnd;
+	CListCtrl m_listTask;
+	CListCtrl m_listTaskRun;
+
+
 protected:
 	HICON m_hIcon;
 
@@ -31,4 +38,10 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+
+
+public:
+
+	afx_msg void OnBnClickedButtonStart();
+	afx_msg void OnBnClickedButtonStop();
 };

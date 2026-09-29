@@ -12,7 +12,6 @@
 #define IDC_LIST_TASK_RUN               1002
 #define IDC_RICHEDIT21                  1003
 #define IDC_BUTTON_START                1004
-#define IDC_BUTTON2                     1005
 #define IDC_BUTTON_STOP                 1005
 
 // Next default values for new objects

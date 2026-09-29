@@ -59,12 +59,17 @@ CBBADlg::CBBADlg(CWnd* pParent /*=nullptr*/)
 void CBBADlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_LIST_WND, m_listWnd);
+	DDX_Control(pDX, IDC_LIST_TASK, m_listTask);
+	DDX_Control(pDX, IDC_LIST_TASK_RUN, m_listTaskRun);
 }
 
 BEGIN_MESSAGE_MAP(CBBADlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BUTTON_START, &CBBADlg::OnBnClickedButtonStart)
+	ON_BN_CLICKED(IDC_BUTTON_STOP, &CBBADlg::OnBnClickedButtonStop)
 END_MESSAGE_MAP()
 
 
@@ -100,6 +105,41 @@ BOOL CBBADlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
+	DWORD dwStyle = m_listWnd.GetExtendedStyle();
+	dwStyle |= LVS_EX_FULLROWSELECT;
+	dwStyle |= LVS_EX_GRIDLINES;
+	dwStyle |= LVS_EX_CHECKBOXES;
+	m_listWnd.SetExtendedStyle(dwStyle);
+
+	m_listWnd.InsertColumn(0, _T("Windows handle"), LVCFMT_CENTER, 90); // insert a column
+
+
+	int iRow = m_listWnd.GetItemCount();
+	m_listWnd.InsertItem(iRow, _T(""));
+
+	CString strId;
+	strId.Format(_T("%d"), 1);
+
+	m_listWnd.SetItemText(iRow, 0, strId);
+
+	// TASK
+	dwStyle = m_listTask.GetExtendedStyle();
+	dwStyle |= LVS_EX_FULLROWSELECT;
+	dwStyle |= LVS_EX_GRIDLINES;
+	m_listTask.SetExtendedStyle(dwStyle);
+
+	m_listTask.InsertColumn(0, _T("Task"), LVCFMT_CENTER, 170); // insert a column
+
+
+
+	// RUN TASK
+	dwStyle = m_listTaskRun.GetExtendedStyle();
+	dwStyle |= LVS_EX_FULLROWSELECT;
+	dwStyle |= LVS_EX_GRIDLINES;
+	m_listTaskRun.SetExtendedStyle(dwStyle);
+
+	m_listTaskRun.InsertColumn(0, _T("Task Run"), LVCFMT_CENTER, 170); // insert a column
+
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -153,3 +193,13 @@ HCURSOR CBBADlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+void CBBADlg::OnBnClickedButtonStart()
+{
+	// TODO: Add your control notification handler code here
+}
+
+void CBBADlg::OnBnClickedButtonStop()
+{
+	// TODO: Add your control notification handler code here
+}
