@@ -62,6 +62,8 @@ void CBBADlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LIST_WND, m_listWnd);
 	DDX_Control(pDX, IDC_LIST_TASK, m_listTask);
 	DDX_Control(pDX, IDC_LIST_TASK_RUN, m_listTaskRun);
+
+	DDX_Control(pDX, IDC_TRACE_MESSAGE, m_TraceServiceControl);
 }
 
 BEGIN_MESSAGE_MAP(CBBADlg, CDialogEx)
@@ -141,6 +143,10 @@ BOOL CBBADlg::OnInitDialog()
 	m_listTaskRun.InsertColumn(0, _T("Task Run"), LVCFMT_CENTER, 170); // insert a column
 
 
+	// Rich edit control
+	CTraceService::TraceString(_T("Test message"), TraceLevel_Normal); // TraceLevel_Debug, TraceLevel_WWarning
+
+
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -197,9 +203,13 @@ HCURSOR CBBADlg::OnQueryDragIcon()
 void CBBADlg::OnBnClickedButtonStart()
 {
 	// TODO: Add your control notification handler code here
+	CTraceService::TraceString(_T("Test message"), TraceLevel_Debug); // TraceLevel_Debug, TraceLevel_WWarning
+
 }
 
 void CBBADlg::OnBnClickedButtonStop()
 {
 	// TODO: Add your control notification handler code here
+	CTraceService::TraceString(_T("Test message"), TraceLevel_Warning); // TraceLevel_Debug, TraceLevel_WWarning
+
 }

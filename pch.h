@@ -9,5 +9,7 @@
 
 // add headers that you want to pre-compile here
 #include "framework.h"
+#include "ServiceCoreHead.h"
+#include "TraceService.h"
 
 #endif //PCH_H

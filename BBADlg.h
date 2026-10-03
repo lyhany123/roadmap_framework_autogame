@@ -24,9 +24,10 @@ public:
 // Implementation
 
 private:
-	CListCtrl m_listWnd;
-	CListCtrl m_listTask;
-	CListCtrl m_listTaskRun;
+	CListCtrl m_listWnd; // sinh t? ??ng khi chu?t ph?i ?? add bi?n
+	CListCtrl m_listTask; // sinh t? ??ng khi chu?t ph?i ?? add bi?n
+	CListCtrl m_listTaskRun; // sinh t? ??ng khi chu?t ph?i ?? add bi?n
+	CTraceServiceControl m_TraceServiceControl; // bi?n Rich Edit control, vi?t th? công
 
 
 protected:

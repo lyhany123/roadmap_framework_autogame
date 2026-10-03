@@ -11,6 +11,8 @@
 #define IDC_LIST_TASK                   1001
 #define IDC_LIST_TASK_RUN               1002
 #define IDC_RICHEDIT21                  1003
+#define IDC_TRACE_MESS                  1003
+#define IDC_TRACE_MESSAGE               1003
 #define IDC_BUTTON_START                1004
 #define IDC_BUTTON_STOP                 1005
 
