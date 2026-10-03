@@ -16,6 +16,12 @@
     <Filter Include="ServiceCore">
       <UniqueIdentifier>{e952b4f4-7bea-4803-8d3b-c312b4802031}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FrameworkModule">
+      <UniqueIdentifier>{8b39343a-f9d8-42f2-b4ec-8101c47f07ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TaskModule">
+      <UniqueIdentifier>{73b61090-7199-48c0-ab65-0076b405e0a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BBA.h">
@@ -84,6 +90,18 @@
     <ClInclude Include="include\ServiceCore\WHThread.h">
       <Filter>ServiceCore</Filter>
     </ClInclude>
+    <ClInclude Include="CBBAEngine.h">
+      <Filter>FrameworkModule</Filter>
+    </ClInclude>
+    <ClInclude Include="CWndManager.h">
+      <Filter>FrameworkModule</Filter>
+    </ClInclude>
+    <ClInclude Include="CTaskManager.h">
+      <Filter>FrameworkModule</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h">
+      <Filter>FrameworkModule</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BBA.cpp">
@@ -130,6 +148,15 @@
     </ClCompile>
     <ClCompile Include="include\ServiceCore\WHThread.cpp">
       <Filter>ServiceCore</Filter>
+    </ClCompile>
+    <ClCompile Include="CBBAEngine.cpp">
+      <Filter>FrameworkModule</Filter>
+    </ClCompile>
+    <ClCompile Include="CWndManager.cpp">
+      <Filter>FrameworkModule</Filter>
+    </ClCompile>
+    <ClCompile Include="CTaskManager.cpp">
+      <Filter>FrameworkModule</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

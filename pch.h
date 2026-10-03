@@ -12,4 +12,6 @@
 #include "ServiceCoreHead.h"
 #include "TraceService.h"
 
+#include "struct.h"
+
 #endif //PCH_H
