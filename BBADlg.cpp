@@ -7,12 +7,13 @@
 #include "BBA.h"
 #include "BBADlg.h"
 #include "afxdialogex.h"
+#include "CBBAEngine.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
-
+CBBAEngine* g_pEngine = NULL;
 // CAboutDlg dialog used for App About
 
 class CAboutDlg : public CDialogEx
@@ -144,8 +145,10 @@ BOOL CBBADlg::OnInitDialog()
 
 
 	// Rich edit control
-	CTraceService::TraceString(_T("Test message"), TraceLevel_Normal); // TraceLevel_Debug, TraceLevel_WWarning
+	//CTraceService::TraceString(_T("Test message"), TraceLevel_Normal); // TraceLevel_Debug, TraceLevel_WWarning
 
+	g_pEngine = new CBBAEngine();
+	g_pEngine->Init();
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
