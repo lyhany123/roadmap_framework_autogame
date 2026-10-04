@@ -14,3 +14,17 @@ struct tagWndInfo
 	}
 
 };
+
+struct tagWndIni
+{
+	CString strProc;
+	CString strTitle;
+	CString strClz;
+
+	tagWndIni()
+	{
+		strProc = _T("");
+		strTitle = _T("");
+		strClz = _T("");
+	}
+};

@@ -18,5 +18,6 @@ CWndManager::~CWndManager()
 
 bool CWndManager::GetWndList(CArray<tagWndInfo>& arrWnd)
 {
+	//GetProcessWnd();
 	return false;
 }
