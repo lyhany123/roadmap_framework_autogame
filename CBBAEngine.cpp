@@ -27,6 +27,11 @@ void CBBAEngine::Init()
 	m_WndIni.strTitle = ini.ReadString(_T("WindowConfig"), _T("WindowTitle"));
 	m_WndIni.strClz = ini.ReadString(_T("WindowConfig"), _T("ClassName"));
 
-	CArray<tagWndInfo> arrWnd;
-	m_wndMgr->GetWndList(arrWnd);
+	m_wndMgr->GetWndList(m_arrWnd);
+	
+}
+
+int CBBAEngine::GetWndList()
+{
+	return m_wndMgr->GetWndList(m_arrWnd);
 }

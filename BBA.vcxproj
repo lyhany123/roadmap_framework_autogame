@@ -243,6 +243,7 @@
     <ResourceCompile Include="BBA.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Debug\GlobalConfig.ini" />
     <None Include="res\BBA.rc2" />
   </ItemGroup>
   <ItemGroup>

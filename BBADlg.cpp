@@ -50,7 +50,6 @@ END_MESSAGE_MAP()
 // CBBADlg dialog
 
 
-
 CBBADlg::CBBADlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_BBA_DIALOG, pParent)
 {
@@ -73,6 +72,7 @@ BEGIN_MESSAGE_MAP(CBBADlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON_START, &CBBADlg::OnBnClickedButtonStart)
 	ON_BN_CLICKED(IDC_BUTTON_STOP, &CBBADlg::OnBnClickedButtonStop)
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 
@@ -215,4 +215,11 @@ void CBBADlg::OnBnClickedButtonStop()
 	// TODO: Add your control notification handler code here
 	CTraceService::TraceString(_T("Test message"), TraceLevel_Warning); // TraceLevel_Debug, TraceLevel_WWarning
 
+}
+
+void CBBADlg::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: Add your message handler code here and/or call default
+
+	CDialogEx::OnTimer(nIDEvent);
 }

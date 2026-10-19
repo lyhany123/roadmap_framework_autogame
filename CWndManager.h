@@ -5,7 +5,7 @@ public:
 	CWndManager();
 	~CWndManager();
 
-	bool GetWndList(CArray<tagWndInfo>& arrWnd);
+	int GetWndList(CArray<tagWndInfo>& arrWnd);
 
 };
 

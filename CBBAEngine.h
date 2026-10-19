@@ -19,7 +19,11 @@ public:
 	tagWndIni m_WndIni;
 	CString m_strWorkPath;
 
+public:
+	CArray<tagWndInfo> m_arrWnd;
 
+public:
+	int GetWndList();
 
 
 };

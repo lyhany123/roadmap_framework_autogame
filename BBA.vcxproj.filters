@@ -168,6 +168,9 @@
     <None Include="res\BBA.rc2">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\Debug\GlobalConfig.ini">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\BBA.ico">
