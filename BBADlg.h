@@ -29,6 +29,8 @@ private:
 	CListCtrl m_listTaskRun; // sinh t? ??ng khi chu?t ph?i ?? add bi?n
 	CTraceServiceControl m_TraceServiceControl; // bi?n Rich Edit control, vi?t th? công
 
+protected:
+	bool IsWndExist(int Hwnd);
 
 protected:
 	HICON m_hIcon;

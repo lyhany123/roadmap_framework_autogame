@@ -48,7 +48,7 @@ END_MESSAGE_MAP()
 
 
 // CBBADlg dialog
-
+#define TIME_UPDATE_WND 1
 
 CBBADlg::CBBADlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_BBA_DIALOG, pParent)
@@ -114,16 +114,17 @@ BOOL CBBADlg::OnInitDialog()
 	dwStyle |= LVS_EX_CHECKBOXES;
 	m_listWnd.SetExtendedStyle(dwStyle);
 
-	m_listWnd.InsertColumn(0, _T("Windows handle"), LVCFMT_CENTER, 90); // insert a column
+	m_listWnd.InsertColumn(0, _T("Windows handle"), LVCFMT_CENTER, 150); // insert a column
+	m_listWnd.InsertColumn(1, _T("Windows title"), LVCFMT_CENTER, 200); // insert a column
 
 
-	int iRow = m_listWnd.GetItemCount();
+	/*int iRow = m_listWnd.GetItemCount();
 	m_listWnd.InsertItem(iRow, _T(""));
 
 	CString strId;
 	strId.Format(_T("%d"), 1);
 
-	m_listWnd.SetItemText(iRow, 0, strId);
+	m_listWnd.SetItemText(iRow, 0, strId);*/
 
 	// TASK
 	dwStyle = m_listTask.GetExtendedStyle();
@@ -149,6 +150,8 @@ BOOL CBBADlg::OnInitDialog()
 
 	g_pEngine = new CBBAEngine();
 	g_pEngine->Init();
+
+	SetTimer(TIME_UPDATE_WND, 3000, NULL);
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -217,9 +220,47 @@ void CBBADlg::OnBnClickedButtonStop()
 
 }
 
+bool CBBADlg::IsWndExist(int Hwnd)
+{
+	for (int i = 0; i < m_listWnd.GetItemCount(); i++)
+	{
+		CString strHwnd = m_listWnd.GetItemText(i, 0);
+		int nHwndTmp = _ttoi(strHwnd);
+		if (Hwnd == nHwndTmp)
+			return true;
+	}
+	return false;
+}
+
+
+
 void CBBADlg::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: Add your message handler code here and/or call default
+	if (nIDEvent == TIME_UPDATE_WND)
+	{
+		g_pEngine->GetWndList();
+
+		if (g_pEngine->m_arrWnd.GetCount() > 0)
+		{
+			for (int i = 0; i < g_pEngine->m_arrWnd.GetCount(); i++)
+			{
+				int hWnd = (int)g_pEngine->m_arrWnd[i].hWnd;
+				if (IsWndExist(hWnd))
+				{
+					m_listWnd.SetItemText(i, 1, g_pEngine->m_arrWnd[i].strTitle);
+				}
+				else
+				{
+					int iRow = m_listWnd.GetItemCount();
+					m_listWnd.InsertItem(iRow, _T(""));
+
+					m_listWnd.SetItemText(i, 0, I2S(hWnd));
+					m_listWnd.SetItemText(i, 1, g_pEngine->m_arrWnd[i].strTitle);
+				}
+			}
+		}
+	}
 
 	CDialogEx::OnTimer(nIDEvent);
 }
