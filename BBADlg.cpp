@@ -245,7 +245,8 @@ void CBBADlg::OnTimer(UINT_PTR nIDEvent)
 		{
 			for (int i = 0; i < g_pEngine->m_arrWnd.GetCount(); i++)
 			{
-				int hWnd = (int)g_pEngine->m_arrWnd[i].hWnd;
+				//if project autogame LDPlayer use .id, PC windows use .hWnd
+				int hWnd = (int)g_pEngine->m_arrWnd[i].id;
 				if (IsWndExist(hWnd))
 				{
 					m_listWnd.SetItemText(i, 1, g_pEngine->m_arrWnd[i].strTitle);

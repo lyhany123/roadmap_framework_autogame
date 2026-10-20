@@ -26,12 +26,21 @@ void CBBAEngine::Init()
 	m_WndIni.strProc = ini.ReadString(_T("WindowConfig"), _T("ProcessName"));
 	m_WndIni.strTitle = ini.ReadString(_T("WindowConfig"), _T("WindowTitle"));
 	m_WndIni.strClz = ini.ReadString(_T("WindowConfig"), _T("ClassName"));
+	m_WndIni.strLDPath = ini.ReadString(_T("WindowConfig"), _T("LDPath"));
 
-	m_wndMgr->GetWndList(m_arrWnd);
+	//m_wndMgr->GetWndList(m_arrWnd);
 	
 }
 
 int CBBAEngine::GetWndList()
 {
-	return m_wndMgr->GetWndList(m_arrWnd);
+	if (m_WndIni.strLDPath.GetLength() > 5)
+	{
+		return m_wndMgr->GetLDList(m_arrWnd);
+	}
+	else
+	{
+		return m_wndMgr->GetWndList(m_arrWnd);
+	}
+	
 }
