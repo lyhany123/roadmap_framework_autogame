@@ -1,6 +1,7 @@
 ﻿#include "pch.h"
 #include "CBBAEngine.h"
 #include "CWndManager.h"
+#include "CTaskThread.h"
 
 
 CBBAEngine::CBBAEngine()
@@ -43,4 +44,23 @@ int CBBAEngine::GetWndList()
 		return m_wndMgr->GetWndList(m_arrWnd);
 	}
 	
+}
+
+void CBBAEngine::Start()
+{
+	for (int i = 0; i < m_arrWnd.GetCount(); i++)
+	{
+		tagWndInfo* pInfo = m_arrWnd[i];
+		if (pInfo->strTitle.Find(_T("LDPlayer-1")) != -1)
+		{
+			tagTaskInfo* pTask = new tagTaskInfo;
+			pTask->id = pInfo->id;
+			pTask->pWnd = pInfo;
+			pTask->pTask = new CTaskThread(pInfo->strTitle);
+			pTask->pTask->StartThread();
+
+			m_arrTask.Add(pTask);
+		}
+
+	}
 }

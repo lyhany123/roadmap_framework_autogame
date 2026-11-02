@@ -32,3 +32,17 @@ struct tagWndIni
 		strLDPath = _T("");
 	}
 };
+
+class CTaskThread;
+struct tagTaskInfo {
+	int           id;
+	tagWndInfo* pWnd;
+	CTaskThread* pTask;
+
+	tagTaskInfo()
+	{
+		id = 0;
+		pWnd = NULL;
+		pTask = NULL;
+	}
+};

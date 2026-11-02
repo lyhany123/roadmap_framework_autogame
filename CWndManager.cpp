@@ -18,7 +18,7 @@ CWndManager::~CWndManager()
 
 }
 
-int CWndManager::GetWndList(CArray<tagWndInfo>& arrWnd)
+int CWndManager::GetWndList(CArray<tagWndInfo*>& arrWnd)
 {
 	CArray<tagEnumExeWndParam> arrEnumWnd;
 	GetProcessWnd(g_pEngine->m_WndIni.strProc, g_pEngine->m_WndIni.strTitle, g_pEngine->m_WndIni.strClz, arrEnumWnd);
@@ -37,21 +37,30 @@ int CWndManager::GetWndList(CArray<tagWndInfo>& arrWnd)
         bool bExist = false;
         for (int j = 0; j < arrWnd.GetCount(); j++)
         {
-            if (info.hWnd == arrWnd[j].hWnd)
+            if (info.hWnd == arrWnd[j]->hWnd)
             {
-                arrWnd[j].rtWnd = info.rtWnd;
-                arrWnd[j].strTitle = info.strTitle;
+                arrWnd[j]->rtWnd = info.rtWnd;
+                arrWnd[j]->strTitle = info.strTitle;
                 bExist = true;
             }
         }
-        if (!bExist)
-            arrWnd.Add(info);
+		if (!bExist)
+		{
+			tagWndInfo* pInfo = new tagWndInfo;
+			pInfo->id = info.id;
+			pInfo->hWnd = info.hWnd;
+			pInfo->rtWnd = info.rtWnd;
+			pInfo->strTitle = info.strTitle;
+
+			arrWnd.Add(pInfo);
+		}
+            
     }
 
 	return arrWnd.GetCount();
 }
 
-int CWndManager::GetLDList(CArray<tagWndInfo>& arrWnd)
+int CWndManager::GetLDList(CArray<tagWndInfo*>& arrWnd)
 {
 	CString strRet = ListVM();
 	//0, LDPlayer, 0, 0, 0, -1, -1, 1280, 720, 240
@@ -66,37 +75,46 @@ int CWndManager::GetLDList(CArray<tagWndInfo>& arrWnd)
 	for (int i = 0; i < strArray.GetSize(); i++)
 	{
 		//0, LDPlayer, 0, 0, 0, -1, -1
-		tagWndInfo infoTmp;
+		tagWndInfo info;
 		CString strVm = strArray.GetAt(i);
 
 		CString strTmp;
 
 		AfxExtractSubString(strTmp, (LPCTSTR)strVm, 0, _T(','));
-		infoTmp.id = _ttoi(strTmp);
+		info.id = _ttoi(strTmp);
 
         AfxExtractSubString(strTmp, (LPCTSTR)strVm, 1, _T(','));
-        infoTmp.strTitle = strTmp;
+		info.strTitle = strTmp;
 
         // HWND child windows
         AfxExtractSubString(strTmp, (LPCTSTR)strVm, 3, _T(','));
-        infoTmp.hWnd = (HWND)_ttoi(strTmp);
+		info.hWnd = (HWND)_ttoi(strTmp);
 
-        if (infoTmp.hWnd != NULL)
-            ::GetWindowRect(infoTmp.hWnd, infoTmp.rtWnd);
+        if (info.hWnd != NULL)
+            ::GetWindowRect(info.hWnd, info.rtWnd);
 
         bool bExist = false;
         for (int j = 0; j < arrWnd.GetCount(); j++)
         {
-            if (arrWnd[j].id == infoTmp.id)
+            if (arrWnd[j]->id == info.id)
             {
                 bExist = true;
-                arrWnd[j].strTitle = infoTmp.strTitle;
-                arrWnd[j].rtWnd = infoTmp.rtWnd;
+                arrWnd[j]->strTitle = info.strTitle;
+                arrWnd[j]->rtWnd = info.rtWnd;
                 break;
             }
         }
-        if (!bExist)
-            arrWnd.Add(infoTmp);
+		if (!bExist)
+		{
+			tagWndInfo* pInfo = new tagWndInfo;
+			pInfo->id = info.id;
+			pInfo->hWnd = info.hWnd;
+			pInfo->rtWnd = info.rtWnd;
+			pInfo->strTitle = info.strTitle;
+
+			arrWnd.Add(pInfo);
+		}
+            
 	}
     return arrWnd.GetCount();
 }
