@@ -29,6 +29,9 @@ private:
 	CListCtrl m_listTaskRun; // sinh t? ??ng khi chu?t ph?i ?? add bi?n
 	CTraceServiceControl m_TraceServiceControl; // bi?n Rich Edit control, vi?t th? công
 
+private:
+	static UINT RegDmThread(LPVOID pParam);
+
 protected:
 	bool IsWndExist(int Hwnd);
 

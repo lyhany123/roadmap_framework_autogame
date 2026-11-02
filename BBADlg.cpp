@@ -1,4 +1,4 @@
-
+﻿
 // BBADlg.cpp : implementation file
 //
 
@@ -8,6 +8,15 @@
 #include "BBADlg.h"
 #include "afxdialogex.h"
 #include "CBBAEngine.h"
+
+#include <windows.h>
+#include <iostream>
+#include <comdef.h>
+
+#import "lw9.09.dll" no_namespace
+
+#pragma comment(lib, "Ole32.lib")
+#pragma comment(lib, "OleAut32.lib")
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -153,6 +162,8 @@ BOOL CBBADlg::OnInitDialog()
 
 	SetTimer(TIME_UPDATE_WND, 3000, NULL);
 
+	AfxBeginThread(RegDmThread, this, THREAD_PRIORITY_NORMAL, 0, 0, NULL);
+
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -204,6 +215,78 @@ HCURSOR CBBADlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
+
+
+UINT CBBADlg::RegDmThread(LPVOID pParam)
+{
+	CBBADlg* pThis = (CBBADlg*)pParam;
+
+	HRESULT hr = CoInitialize(nullptr);
+
+	if (FAILED(hr))
+	{
+		LogE(_T("CoInitialize failed: 0x%08X"),
+			static_cast<unsigned int>(hr));
+		return 1;
+	}
+
+	UINT result = 0;
+
+	try
+	{
+		// 1. Khởi tạo đối tượng LeWan COM
+		IlwsoftPtr lw;
+
+		hr = lw.CreateInstance(__uuidof(lwsoft));
+
+		if (FAILED(hr))
+		{
+			LogE(_T("CreateInstance failed: 0x%08X"),
+				static_cast<unsigned int>(hr));
+
+			result = 2;
+		}
+		else
+		{
+			LogD(_T("LeWan COM object created successfully."));
+
+			// 2. Lấy phiên bản LeWan
+			_bstr_t version = lw->ver();
+
+			CString strVersion(
+				static_cast<const wchar_t*>(version)
+			);
+
+			LogD(_T("LeWan version: %s"), strVersion.GetString());
+
+			// 3. Di chuyển chuột
+			lw->MoveTo(100, 100);
+
+			LogD(_T("MoveTo called: X=100, Y=100."));
+		}
+	}
+	catch (const _com_error& e)
+	{
+		LogE(_T("COM error: 0x%08X"),
+			static_cast<unsigned int>(e.Error()));
+
+		CString errorMessage(e.ErrorMessage());
+
+		LogE(_T("COM error details: %s"),
+			errorMessage.GetString());
+
+		result = 3;
+	}
+
+	// 4. Giải phóng COM
+	CoUninitialize();
+
+	LogD(_T("LeWan test completed."));
+
+	return result;
+}
+
+
 
 
 void CBBADlg::OnBnClickedButtonStart()
