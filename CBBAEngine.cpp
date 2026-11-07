@@ -56,7 +56,7 @@ void CBBAEngine::Start()
 			tagTaskInfo* pTask = new tagTaskInfo;
 			pTask->id = pInfo->id;
 			pTask->pWnd = pInfo;
-			pTask->pTask = new CTaskThread(pInfo->strTitle);
+			pTask->pTask = new CTaskThread(pInfo);
 			pTask->pTask->StartThread();
 
 			m_arrTask.Add(pTask);

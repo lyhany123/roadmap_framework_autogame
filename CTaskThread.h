@@ -4,11 +4,11 @@ class CTaskThread :
     public CWHThread
 {
 public:
-    CTaskThread(CString strTitle);
+    CTaskThread(tagWndInfo* pWnd);
     ~CTaskThread();
 
 private:
-    CString m_strTitle;
+    tagWndInfo* m_pWnd;
     bool m_bind;
 
 public:
