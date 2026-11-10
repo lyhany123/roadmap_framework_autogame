@@ -56,16 +56,23 @@ void CBBAEngine::Start()
 	for (int i = 0; i < m_arrWnd.GetCount(); i++)
 	{
 		tagWndInfo* pInfo = m_arrWnd[i];
-		//if (pInfo->strTitle.Find(_T("LDPlayer-1")) != -1)
-		{
-			tagTaskInfo* pTask = new tagTaskInfo;
-			pTask->id = pInfo->id;
-			pTask->pWnd = pInfo;
-			pTask->pTask = new CTaskThread(pInfo);
-			pTask->pTask->StartThread();
 
-			m_arrTask.Add(pTask);
-		}
+		tagTaskInfo* pTask = new tagTaskInfo;
 
+		pTask->id = pInfo->id;
+		pTask->pWnd = pInfo;
+		pTask->pTask = new CTaskThread(pInfo);
+
+		// Lưu task trước để đảm bảo đối tượng
+		// tồn tại trong suốt quá trình khởi chạy.
+		m_arrTask.Add(pTask);
+
+		// Gọi StartThread trên luồng trung gian.
+		m_startLaunchers.emplace_back(
+			[pTask]()
+			{
+				pTask->pTask->StartThread();
+			}
+		);
 	}
 }

@@ -1,4 +1,7 @@
 #pragma once
+#include <thread>
+#include <vector>
+
 class CWndManager;
 class CBBAEngine
 {
@@ -11,6 +14,7 @@ private:
 	CWndManager* m_wndMgr;
 	// process logic task
 	// manage resource
+	std::vector<std::thread> m_startLaunchers;
 
 public:
 	void Init();

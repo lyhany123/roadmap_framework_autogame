@@ -23,6 +23,7 @@ private:
 private:
     bool Bind();
     bool OpenRoleInfo();
+    static void TaskDebugLog(LPCTSTR pszFormat, ...);
 
 public:
     virtual bool OnEventThreadRun() override;
