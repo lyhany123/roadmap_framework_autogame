@@ -28,6 +28,11 @@ void CBBAEngine::Init()
 	m_WndIni.strTitle = ini.ReadString(_T("WindowConfig"), _T("WindowTitle"));
 	m_WndIni.strClz = ini.ReadString(_T("WindowConfig"), _T("ClassName"));
 	m_WndIni.strLDPath = ini.ReadString(_T("WindowConfig"), _T("LDPath"));
+	m_WndIni.strDisplay = ini.ReadString(_T("WindowConfig"), _T("display"));
+	m_WndIni.strMouse = ini.ReadString(_T("WindowConfig"), _T("mouse"));
+	m_WndIni.strKeypad = ini.ReadString(_T("WindowConfig"), _T("keypad"));
+	m_WndIni.strPublic = ini.ReadString(_T("WindowConfig"), _T("public"));
+	m_WndIni.iMode = ini.ReadString(_T("WindowConfig"), _T("mode"));
 
 	//m_wndMgr->GetWndList(m_arrWnd);
 	
@@ -51,7 +56,7 @@ void CBBAEngine::Start()
 	for (int i = 0; i < m_arrWnd.GetCount(); i++)
 	{
 		tagWndInfo* pInfo = m_arrWnd[i];
-		if (pInfo->strTitle.Find(_T("LDPlayer-1")) != -1)
+		//if (pInfo->strTitle.Find(_T("LDPlayer-1")) != -1)
 		{
 			tagTaskInfo* pTask = new tagTaskInfo;
 			pTask->id = pInfo->id;

@@ -105,6 +105,9 @@
     <ClInclude Include="CTaskThread.h">
       <Filter>FrameworkModule</Filter>
     </ClInclude>
+    <ClInclude Include="include\ServiceCore\LeWanHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BBA.cpp">
@@ -163,6 +166,9 @@
     </ClCompile>
     <ClCompile Include="CTaskThread.cpp">
       <Filter>FrameworkModule</Filter>
+    </ClCompile>
+    <ClCompile Include="include\ServiceCore\LeWanHelper.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,24 +1,31 @@
-#pragma once
+﻿#pragma once
+
 #include "WHThread.h"
-class CTaskThread :
-    public CWHThread
+#include "LeWanHelper.h"
+
+class CTaskThread : public CWHThread
 {
 public:
     CTaskThread(tagWndInfo* pWnd);
-    ~CTaskThread();
+    virtual ~CTaskThread();
 
 private:
-    tagWndInfo* m_pWnd;
-    bool m_bind;
+    // Thông tin cửa sổ
+    tagWndInfo* m_pWnd = nullptr;
+
+    // Trạng thái
+    bool m_bind = false;
+    bool m_bInitialized = false;
+
+    // Quản lý đối tượng LeWan
+    CLeWanHelper m_Lewan;
+
+private:
+    bool Bind();
+    bool OpenRoleInfo();
 
 public:
-    // Run event
-    virtual bool OnEventThreadRun();
-    // Start event
-    virtual bool OnEventThreadStart();
-    // Termination event
-    virtual bool OnEventThreadConclude();
-
-
+    virtual bool OnEventThreadRun() override;
+    virtual bool OnEventThreadStart() override;
+    virtual bool OnEventThreadConclude() override;
 };
-

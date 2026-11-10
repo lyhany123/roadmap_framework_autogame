@@ -47,7 +47,7 @@ int CWndManager::GetWndList(CArray<tagWndInfo*>& arrWnd)
 		if (!bExist)
 		{
 			tagWndInfo* pInfo = new tagWndInfo;
-			pInfo->id = info.id;
+			pInfo->id = (int)info.hWnd;
 			pInfo->hWnd = info.hWnd;
 			pInfo->rtWnd = info.rtWnd;
 			pInfo->strTitle = info.strTitle;

@@ -196,6 +196,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="include\ServiceCore\Array.h" />
     <ClInclude Include="include\ServiceCore\Define.h" />
+    <ClInclude Include="include\ServiceCore\LeWanHelper.h" />
     <ClInclude Include="include\ServiceCore\Lock.h" />
     <ClInclude Include="include\ServiceCore\Macro.h" />
     <ClInclude Include="include\ServiceCore\ServiceCoreHead.h" />
@@ -222,6 +223,10 @@
     <ClCompile Include="CTaskManager.cpp" />
     <ClCompile Include="CTaskThread.cpp" />
     <ClCompile Include="CWndManager.cpp" />
+    <ClCompile Include="include\ServiceCore\LeWanHelper.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="include\ServiceCore\Lock.cpp" />
     <ClCompile Include="include\ServiceCore\TraceService.cpp" />
     <ClCompile Include="include\ServiceCore\utils.cpp" />

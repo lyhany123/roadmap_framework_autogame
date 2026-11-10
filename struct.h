@@ -17,12 +17,19 @@ struct tagWndInfo
 
 };
 
-struct tagWndIni
-{
-	CString strProc;
-	CString strTitle;
-	CString strClz;
-	CString strLDPath;
+
+struct tagWndIni {
+	CString strProc; 
+	CString strTitle;  
+	CString strClz;  
+	CString strLDPath;  
+
+	CString strDisplay;
+	CString strMouse;
+	CString strKeypad;
+	CString strPublic;
+	CString		iMode;
+
 
 	tagWndIni()
 	{
@@ -30,7 +37,14 @@ struct tagWndIni
 		strTitle = _T("");
 		strClz = _T("");
 		strLDPath = _T("");
+
+		strDisplay = _T("");
+		strMouse = _T("");
+		strKeypad = _T("");
+		strPublic = _T("");
+		iMode = _T("");
 	}
+
 };
 
 class CTaskThread;

@@ -162,7 +162,7 @@ BOOL CBBADlg::OnInitDialog()
 
 	SetTimer(TIME_UPDATE_WND, 3000, NULL);
 
-	AfxBeginThread(RegDmThread, this, THREAD_PRIORITY_NORMAL, 0, 0, NULL);
+	//AfxBeginThread(RegDmThread, this, THREAD_PRIORITY_NORMAL, 0, 0, NULL);
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
