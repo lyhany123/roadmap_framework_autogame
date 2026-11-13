@@ -23,6 +23,7 @@ private:
 private:
     bool Bind();
     bool OpenRoleInfo();
+    bool Find(CString strUI);
     static void TaskDebugLog(LPCTSTR pszFormat, ...);
 
 public:

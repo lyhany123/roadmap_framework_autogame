@@ -27,12 +27,16 @@ public:
 	CString m_strWorkPath;
 
 public:
+	// list resource
+	CArray<tagResItem*> m_arrRes;
+	// list windows
 	CArray<tagWndInfo*> m_arrWnd;
+	// list task
 	CArray<tagTaskInfo*> m_arrTask;
 
-public:
+private:
 	
-
+	bool LoadRes();
 
 };
 

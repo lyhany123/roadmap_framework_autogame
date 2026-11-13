@@ -209,3 +209,8 @@ void CTaskThread::TaskDebugLog(LPCTSTR pszFormat, ...)
     OutputDebugString(szBuffer);
     OutputDebugString(_T("\r\n"));
 }
+
+bool CTaskThread::Find(CString strUI)
+{
+    return false;
+}

@@ -2,6 +2,7 @@
 #include "CBBAEngine.h"
 #include "CWndManager.h"
 #include "CTaskThread.h"
+#include "locale.h"
 
 
 CBBAEngine::CBBAEngine()
@@ -49,6 +50,8 @@ void CBBAEngine::Init()
 	ReadIni(_T("keypad"), m_WndIni.strKeypad);
 	ReadIni(_T("public"), m_WndIni.strPublic);
 	ReadIni(_T("mode"), m_WndIni.iMode);
+
+	LoadRes();
 }
 
 int CBBAEngine::GetWndList()
@@ -88,4 +91,38 @@ void CBBAEngine::Start()
 			}
 		);
 	}
+}
+
+bool CBBAEngine::LoadRes()
+{
+	// Build resource file path
+	CString strResFile = m_strWorkPath + _T("/res/res.txt");
+	if (!PathFileExists(strResFile))
+	{
+		LogE(_T("res.txt file does not exist"));
+		return false;
+	}
+
+	char* old_locale = _strdup(setlocale(LC_CTYPE, NULL));
+	setlocale(LC_CTYPE, "chs");
+
+	CStdioFile file;
+
+	if (!file.Open(strResFile, CFile::modeRead))
+	{
+		LogE(_T("Failed to open res.txt file"));
+		return false;
+	}
+
+	CString strRead = _T("");
+	while (file.ReadString(strRead))
+	{
+		LogD(_T("%s"), strRead);
+	}
+
+	setlocale(LC_CTYPE, old_locale);
+	free(old_locale);
+
+	file.Close();
+	return true;
 }

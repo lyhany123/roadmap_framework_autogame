@@ -60,3 +60,26 @@ struct tagTaskInfo {
 		pTask = NULL;
 	}
 };
+
+struct tagResItem {
+	CString strName;
+
+	int iType; // 0: FindImage, 1: FindColor, 2: FindText (OCR)
+	CRect rtArea;
+	CString strRes; // Image name, color, or text
+
+	CString strDeltaClr;
+	double dSim;
+	int iDir;
+
+	tagResItem()
+	{
+		strName = _T("");
+		iType = 0;
+		rtArea = CRect(0, 0, 0, 0);
+		strRes = _T("");
+		strDeltaClr = _T("");
+		dSim = 0;
+		iDir = 0;
+	}
+};
