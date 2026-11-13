@@ -25,7 +25,9 @@ public:
 public:
 	tagWndIni m_WndIni;
 	CString m_strWorkPath;
-
+	int m_iWidth;
+	int m_iHeight;
+		
 public:
 	// list resource
 	CArray<tagResItem*> m_arrRes;
