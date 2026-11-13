@@ -21,21 +21,34 @@ void CBBAEngine::Init()
 	CWHService::GetWorkDirectory(szPath, 256);
 	m_strWorkPath = szPath;
 
-	//D:\programming\BBA\Debug
-	CWHIniData ini;  
-	ini.SetIniFilePath(m_strWorkPath + _T("/GlobalConfig.ini")); // or use "\\GlobalConfig.ini"
-	m_WndIni.strProc = ini.ReadString(_T("WindowConfig"), _T("ProcessName"));
-	m_WndIni.strTitle = ini.ReadString(_T("WindowConfig"), _T("WindowTitle"));
-	m_WndIni.strClz = ini.ReadString(_T("WindowConfig"), _T("ClassName"));
-	m_WndIni.strLDPath = ini.ReadString(_T("WindowConfig"), _T("LDPath"));
-	m_WndIni.strDisplay = ini.ReadString(_T("WindowConfig"), _T("display"));
-	m_WndIni.strMouse = ini.ReadString(_T("WindowConfig"), _T("mouse"));
-	m_WndIni.strKeypad = ini.ReadString(_T("WindowConfig"), _T("keypad"));
-	m_WndIni.strPublic = ini.ReadString(_T("WindowConfig"), _T("public"));
-	m_WndIni.iMode = ini.ReadString(_T("WindowConfig"), _T("mode"));
+	CWHIniData ini;
+	ini.SetIniFilePath(m_strWorkPath + _T("/GlobalConfig.ini"));
 
-	//m_wndMgr->GetWndList(m_arrWnd);
-	
+	auto ReadIni = [&](LPCTSTR key, CString& value)
+		{
+			TCHAR szBuffer[1024] = { 0 };
+
+			ini.ReadString(
+				_T("WindowConfig"),
+				key,
+				_T(""),
+				szBuffer,
+				_countof(szBuffer)
+			);
+
+			value = szBuffer;
+		};
+
+	ReadIni(_T("ProcessName"), m_WndIni.strProc);
+	ReadIni(_T("WindowTitle"), m_WndIni.strTitle);
+	ReadIni(_T("ClassName"), m_WndIni.strClz);
+	ReadIni(_T("LDPath"), m_WndIni.strLDPath);
+
+	ReadIni(_T("display"), m_WndIni.strDisplay);
+	ReadIni(_T("mouse"), m_WndIni.strMouse);
+	ReadIni(_T("keypad"), m_WndIni.strKeypad);
+	ReadIni(_T("public"), m_WndIni.strPublic);
+	ReadIni(_T("mode"), m_WndIni.iMode);
 }
 
 int CBBAEngine::GetWndList()

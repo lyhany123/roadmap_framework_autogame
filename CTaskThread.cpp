@@ -87,7 +87,7 @@ bool CTaskThread::OnEventThreadRun()
 
     Sleep(5000);
 
-    return true;
+    return false;
 }
 
 
@@ -170,7 +170,7 @@ bool CTaskThread::OpenRoleInfo()
 
     Sleep(5000);
 
-    long moveRet = lw->MoveTo(100, 95);
+    long moveRet = lw->MoveTo(204, 126);
 
     TaskDebugLog(
         _T("MoveTo(97,101): %ld"),
