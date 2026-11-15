@@ -123,6 +123,7 @@ bool CTaskThread::Bind()
     }
 
     IlwsoftPtr& lw = m_Lewan.GetObject();
+    
 
     if (lw == nullptr)
     {
@@ -155,7 +156,7 @@ bool CTaskThread::Bind()
     return ret == 1;
 }
 
-
+// Đã xoá hàm này trong .h
 bool CTaskThread::OpenRoleInfo()
 {
     if (!m_bInitialized)
@@ -210,10 +211,10 @@ void CTaskThread::TaskDebugLog(LPCTSTR pszFormat, ...)
     OutputDebugString(_T("\r\n"));
 }
 
-bool CTaskThread::Find(CString strUI)
+bool CTaskThread::Find(CString strUI, CRect rtArea)
 {
     CPoint ptFind;
-    return Find(strUI, ptFind);
+    return Find(strUI, ptFind, rtArea);
 }
 
 void CTaskThread::Click(int x, int y)
@@ -260,6 +261,16 @@ bool CTaskThread::Find(CString strUI, OUT CPoint& ptFind, CRect rtArea)
             pItem->rtArea.right + 1,
             pItem->rtArea.bottom + 1,
             pItem->strRes, pItem->dSim, pItem->iDir, &x, &y);
+    }
+    else if (pItem->iType == 2)
+    {
+        // Find text
+        m_pDm->UseDict(pItem->iDir);
+        ret = m_pDm->FindStr(pItem->rtArea.left - 1,
+            pItem->rtArea.top - 1,
+            pItem->rtArea.right + 1,
+            pItem->rtArea.bottom + 1,
+            pItem->strRes, pItem->strDeltaClr, pItem->dSim, &x, &y);
     }
     ptFind.x = x;
     ptFind.y = y;
@@ -365,3 +376,18 @@ void CTaskThread::KeyUp(long vk)
     m_pDm->KeyUp(vk);
 }
 
+CString CTaskThread::Ocr(CString strUI, CRect rtArea)
+{
+    tagResItem* pItem = g_pEngine->GetResItem(strUI);
+    if (!pItem)
+    {
+        LogE(_T("%s: Resource item not found"), strUI);
+        return _T("");
+    }
+
+    if (rtArea.left != 0)
+        pItem->rtArea = rtArea;
+
+    m_pDm->UseDict(pItem->iDir);
+    return m_pDm->Ocr(pItem->rtArea.left, pItem->rtArea.top, pItem->rtArea.right, pItem->rtArea.bottom, pItem->strDeltaClr, pItem->dSim);
+}

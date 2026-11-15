@@ -20,12 +20,11 @@ private:
     // Quản lý đối tượng LeWan
     CLeWanHelper m_Lewan;
 
-private:
+protected:
     bool Bind();
-    bool OpenRoleInfo();
 
     //FindPic/ FindColor/ FindText
-    bool Find(CString strUI);
+    bool Find(CString strUI, CRect rtArea = CRect(0, 0, 0, 0));
     bool Find(CString strUI, OUT CPoint& ptFind, CRect rtArea = CRect(0, 0, 0, 0));
 
     //Mouse
@@ -48,8 +47,8 @@ private:
     void Click(int x, int y);
     void Click(CPoint ptClk);
     ////Double click
-    void Dlick(int x, int y);
-    void Dlick(CPoint ptClk);
+    void DClick(int x, int y);
+    void DClick(CPoint ptClk);
 
     ////
     void RClick(int x, int y);
@@ -62,6 +61,8 @@ private:
     void KeyDown(long vk);
     void KeyPress(long vk);
     void KeyUp(long vk);
+
+    CString Ocr(CString strUI, CRect rtArea = CRect(0, 0, 0, 0));
 
     // in log
     static void TaskDebugLog(LPCTSTR pszFormat, ...);
