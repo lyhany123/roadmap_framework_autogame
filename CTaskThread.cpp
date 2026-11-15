@@ -212,5 +212,156 @@ void CTaskThread::TaskDebugLog(LPCTSTR pszFormat, ...)
 
 bool CTaskThread::Find(CString strUI)
 {
-    return false;
+    CPoint ptFind;
+    return Find(strUI, ptFind);
 }
+
+void CTaskThread::Click(int x, int y)
+{
+    m_pDm->MoveTo(x, y);
+    Sleep(50 + rand() % 100);
+    m_pDm->LeftClick();
+}
+void CTaskThread::Click(CPoint ptClk)
+{
+    Click(ptClk.x, ptClk.y);
+}
+bool CTaskThread::Find(CString strUI, OUT CPoint& ptFind, CRect rtArea)
+{
+    tagResItem* pItem = g_pEngine->GetResItem(strUI);
+    if (!pItem)
+    {
+        LogE(_T("%s: Resource item not found"), strUI);
+        return false;
+    }
+
+    if (rtArea.left != 0)
+    {
+        pItem->rtArea = rtArea;
+    }
+
+    long x = -1, y = -1;
+    long ret = -1;
+    if (pItem->iType == 0)
+    {
+        // FindPic
+        ret = m_pDm->FindPic(pItem->rtArea.left - 1,
+            pItem->rtArea.top - 1,
+            pItem->rtArea.right + 1,
+            pItem->rtArea.bottom + 1,
+            pItem->strRes, pItem->strDeltaClr, pItem->dSim, pItem->iDir, &x, &y);
+        LogE(_T("x=%d y=%d: "), x, y);
+    }
+    else if (pItem->iType == 1)
+    {
+        // FindColor
+        ret = m_pDm->FindColor(pItem->rtArea.left - 1,
+            pItem->rtArea.top - 1,
+            pItem->rtArea.right + 1,
+            pItem->rtArea.bottom + 1,
+            pItem->strRes, pItem->dSim, pItem->iDir, &x, &y);
+    }
+    ptFind.x = x;
+    ptFind.y = y;
+
+    return x != -1;
+
+}
+
+void CTaskThread::MoveTo(int x, int y)
+{
+    m_pDm->MoveTo(x, y);
+}
+void CTaskThread::MoveR(int rx, int ry)
+{
+    m_pDm->MoveR(rx, ry);
+}
+void CTaskThread::LeftClick()
+{
+    m_pDm->LeftClick();
+}
+void CTaskThread::LeftDown()
+{
+    m_pDm->LeftDown();
+}
+void CTaskThread::LeftUp()
+{
+    m_pDm->LeftUp();
+}
+
+void CTaskThread::RightClick()
+{
+    m_pDm->RightClick();
+}
+void CTaskThread::RightDown()
+{
+    m_pDm->RightDown();
+}
+void CTaskThread::RightUp()
+{
+    m_pDm->RightUp();
+}
+void CTaskThread::WheelDown()
+{
+    m_pDm->WheelDown();
+}
+void CTaskThread::WheelUp()
+{
+    m_pDm->WheelUp();
+}
+
+void CTaskThread::DClick(CPoint ptClk)
+{
+    DClick(ptClk.x, ptClk.y);
+}
+
+void CTaskThread::DClick(int x, int y)
+{
+    m_pDm->MoveTo(x, y);
+    Sleep(50 + rand() % 100);
+    m_pDm->LeftClick();
+    Sleep(20 + rand() % 50);
+    m_pDm->LeftClick();
+}
+
+void CTaskThread::RClick(CPoint ptClk)
+{
+    RClick(ptClk.x, ptClk.y);
+}
+
+void CTaskThread::RClick(int x, int y)
+{
+    m_pDm->MoveTo(x, y);
+    Sleep(50 + rand() % 100);
+    m_pDm->RightClick();
+}
+
+void CTaskThread::DRClick(CPoint ptClk)
+{
+    DRClick(ptClk.x, ptClk.y);
+}
+
+void CTaskThread::DRClick(int x, int y)
+{
+    m_pDm->MoveTo(x, y);
+    Sleep(50 + rand() % 100);
+    m_pDm->RightClick();
+    Sleep(20 + rand() % 50);
+    m_pDm->RightClick();
+}
+
+void CTaskThread::KeyDown(long vk)
+{
+    m_pDm->KeyDown(vk);
+}
+
+void CTaskThread::KeyPress(long vk)
+{
+    m_pDm->KeyPress(vk);
+}
+
+void CTaskThread::KeyUp(long vk)
+{
+    m_pDm->KeyUp(vk);
+}
+

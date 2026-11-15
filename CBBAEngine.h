@@ -21,6 +21,7 @@ public:
 	int GetWndList();
 	// Start thread
 	void Start();
+	tagResItem* GetResItem(CString& strName);
 
 public:
 	tagWndIni m_WndIni;

@@ -201,6 +201,14 @@ bool CBBAEngine::LoadRes()
 		{
 			pItem->iType = 2;
 		}
+		else if (strType == _T("FontLibrary"))
+		{
+			pItem->iType = 3;
+		}
+		else if (strType == _T("RecognizeText"))
+		{
+			pItem->iType = 4;
+		}
 
 		m_arrRes.Add(pItem);
 	}
@@ -210,4 +218,18 @@ bool CBBAEngine::LoadRes()
 
 	file.Close();
 	return true;
+}
+
+// Get resource item
+tagResItem* CBBAEngine::GetResItem(CString& strName)  
+{
+	for (int i = 0; i < m_arrRes.GetCount(); i++)
+	{
+		if (m_arrRes[i]->strName == strName)
+		{
+			return m_arrRes[i];
+		}
+	}
+
+	return NULL;
 }
